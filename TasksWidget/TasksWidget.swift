@@ -199,7 +199,7 @@ struct WidgetTaskRow: View {
                         .font(.system(size: compact ? 13 : 15))
                         .foregroundStyle(.primary)
                         .lineLimit(1)
-                    if !compact, let subtitle {
+                    if !compact {
                         subtitle
                             .font(.system(size: 12))
                             .lineLimit(1)

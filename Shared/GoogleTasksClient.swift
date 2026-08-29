@@ -17,7 +17,9 @@ enum GoogleTasksClient {
             let tasks = try await fetchTasks(listId: list.id)
             hydrated.append(TaskList(id: list.id, title: list.title ?? "Untitled", updated: DateParser.date(list.updated), tasks: tasks))
         }
-        let email = (try? await fetchUserEmail()) ?? (await TokenManager.shared.currentTokens())?.email
+        let emailFromProfile = try? await fetchUserEmail()
+        let emailFromTokens = await TokenManager.shared.currentTokens()?.email
+        let email = emailFromProfile ?? emailFromTokens
         let previous = SharedStore.load().selectedListId
         return TasksSnapshot(
             accountEmail: email,
