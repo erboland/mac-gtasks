@@ -1,0 +1,527 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1B2C3D4E5F60718293A0022 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0021 /* AppGroup.swift */; };
+		A1B2C3D4E5F60718293A0023 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0021 /* AppGroup.swift */; };
+		A1B2C3D4E5F60718293A0025 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0024 /* Models.swift */; };
+		A1B2C3D4E5F60718293A0026 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0024 /* Models.swift */; };
+		A1B2C3D4E5F60718293A0028 /* GoogleAuthConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0027 /* GoogleAuthConfig.swift */; };
+		A1B2C3D4E5F60718293A0029 /* GoogleAuthConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0027 /* GoogleAuthConfig.swift */; };
+		A1B2C3D4E5F60718293A002B /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A002A /* KeychainStore.swift */; };
+		A1B2C3D4E5F60718293A002C /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A002A /* KeychainStore.swift */; };
+		A1B2C3D4E5F60718293A002E /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A002D /* SharedStore.swift */; };
+		A1B2C3D4E5F60718293A002F /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A002D /* SharedStore.swift */; };
+		A1B2C3D4E5F60718293A0031 /* ListColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0030 /* ListColor.swift */; };
+		A1B2C3D4E5F60718293A0032 /* ListColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0030 /* ListColor.swift */; };
+		A1B2C3D4E5F60718293A0034 /* DateFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0033 /* DateFormatting.swift */; };
+		A1B2C3D4E5F60718293A0035 /* DateFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0033 /* DateFormatting.swift */; };
+		A1B2C3D4E5F60718293A0037 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0036 /* SampleData.swift */; };
+		A1B2C3D4E5F60718293A0038 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0036 /* SampleData.swift */; };
+		A1B2C3D4E5F60718293A003A /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0039 /* TokenManager.swift */; };
+		A1B2C3D4E5F60718293A003B /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0039 /* TokenManager.swift */; };
+		A1B2C3D4E5F60718293A003D /* GoogleTasksClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A003C /* GoogleTasksClient.swift */; };
+		A1B2C3D4E5F60718293A003E /* GoogleTasksClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A003C /* GoogleTasksClient.swift */; };
+		A1B2C3D4E5F60718293A0040 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A003F /* SyncService.swift */; };
+		A1B2C3D4E5F60718293A0041 /* SyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A003F /* SyncService.swift */; };
+		A1B2C3D4E5F60718293A0043 /* TaskIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0042 /* TaskIntents.swift */; };
+		A1B2C3D4E5F60718293A0044 /* TaskIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0042 /* TaskIntents.swift */; };
+		A1B2C3D4E5F60718293A0046 /* RemindersChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0045 /* RemindersChrome.swift */; };
+		A1B2C3D4E5F60718293A0047 /* RemindersChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0045 /* RemindersChrome.swift */; };
+		A1B2C3D4E5F60718293A0049 /* TasksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0048 /* TasksApp.swift */; };
+		A1B2C3D4E5F60718293A004B /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A004A /* SessionController.swift */; };
+		A1B2C3D4E5F60718293A004D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A004C /* ContentView.swift */; };
+		A1B2C3D4E5F60718293A004F /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A004E /* SidebarView.swift */; };
+		A1B2C3D4E5F60718293A0051 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0050 /* TaskListView.swift */; };
+		A1B2C3D4E5F60718293A0053 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0052 /* TaskRowView.swift */; };
+		A1B2C3D4E5F60718293A0055 /* GoogleOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0054 /* GoogleOAuth.swift */; };
+		A1B2C3D4E5F60718293A0057 /* TasksWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0056 /* TasksWidget.swift */; };
+		A1B2C3D4E5F60718293A0059 /* TasksWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0058 /* TasksWidgetBundle.swift */; };
+		A1B2C3D4E5F60718293A0060 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A005A /* Assets.xcassets */; };
+		A1B2C3D4E5F60718293A0061 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A005D /* Assets.xcassets */; };
+		A1B2C3D4E5F60718293A0014 /* TasksWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0005 /* TasksWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A1B2C3D4E5F60718293A0012 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1B2C3D4E5F60718293A0001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1B2C3D4E5F60718293A0003;
+			remoteInfo = TasksWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A1B2C3D4E5F60718293A0009 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A1B2C3D4E5F60718293A0014 /* TasksWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A1B2C3D4E5F60718293A0021 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0024 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0027 /* GoogleAuthConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthConfig.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A002A /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A002D /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0030 /* ListColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListColor.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0033 /* DateFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatting.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0036 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0039 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A003C /* GoogleTasksClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleTasksClient.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A003F /* SyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncService.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0042 /* TaskIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskIntents.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0045 /* RemindersChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersChrome.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0048 /* TasksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksApp.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A004A /* SessionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A004C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A004E /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0050 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0052 /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0054 /* GoogleOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleOAuth.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0056 /* TasksWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksWidget.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0058 /* TasksWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksWidgetBundle.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0004 /* Tasks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tasks.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D4E5F60718293A0005 /* TasksWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TasksWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D4E5F60718293A005A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A005B /* Tasks.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Tasks.entitlements; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A005C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A005D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A005E /* TasksWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TasksWidget.entitlements; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A005F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1B2C3D4E5F60718293A0008 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D4E5F60718293A000C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1B2C3D4E5F60718293A000D = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D4E5F60718293A000F /* Tasks */,
+				A1B2C3D4E5F60718293A0010 /* TasksWidget */,
+				A1B2C3D4E5F60718293A0011 /* Shared */,
+				A1B2C3D4E5F60718293A000E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1B2C3D4E5F60718293A000E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D4E5F60718293A0004 /* Tasks.app */,
+				A1B2C3D4E5F60718293A0005 /* TasksWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1B2C3D4E5F60718293A000F /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D4E5F60718293A0048 /* TasksApp.swift */,
+				A1B2C3D4E5F60718293A004A /* SessionController.swift */,
+				A1B2C3D4E5F60718293A004C /* ContentView.swift */,
+				A1B2C3D4E5F60718293A004E /* SidebarView.swift */,
+				A1B2C3D4E5F60718293A0050 /* TaskListView.swift */,
+				A1B2C3D4E5F60718293A0052 /* TaskRowView.swift */,
+				A1B2C3D4E5F60718293A0054 /* GoogleOAuth.swift */,
+				A1B2C3D4E5F60718293A005A /* Assets.xcassets */,
+				A1B2C3D4E5F60718293A005B /* Tasks.entitlements */,
+				A1B2C3D4E5F60718293A005C /* Info.plist */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		A1B2C3D4E5F60718293A0010 /* TasksWidget */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D4E5F60718293A0056 /* TasksWidget.swift */,
+				A1B2C3D4E5F60718293A0058 /* TasksWidgetBundle.swift */,
+				A1B2C3D4E5F60718293A005D /* Assets.xcassets */,
+				A1B2C3D4E5F60718293A005E /* TasksWidget.entitlements */,
+				A1B2C3D4E5F60718293A005F /* Info.plist */,
+			);
+			path = TasksWidget;
+			sourceTree = "<group>";
+		};
+		A1B2C3D4E5F60718293A0011 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D4E5F60718293A0021 /* AppGroup.swift */,
+				A1B2C3D4E5F60718293A0024 /* Models.swift */,
+				A1B2C3D4E5F60718293A0027 /* GoogleAuthConfig.swift */,
+				A1B2C3D4E5F60718293A002A /* KeychainStore.swift */,
+				A1B2C3D4E5F60718293A002D /* SharedStore.swift */,
+				A1B2C3D4E5F60718293A0030 /* ListColor.swift */,
+				A1B2C3D4E5F60718293A0033 /* DateFormatting.swift */,
+				A1B2C3D4E5F60718293A0036 /* SampleData.swift */,
+				A1B2C3D4E5F60718293A0039 /* TokenManager.swift */,
+				A1B2C3D4E5F60718293A003C /* GoogleTasksClient.swift */,
+				A1B2C3D4E5F60718293A003F /* SyncService.swift */,
+				A1B2C3D4E5F60718293A0042 /* TaskIntents.swift */,
+				A1B2C3D4E5F60718293A0045 /* RemindersChrome.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1B2C3D4E5F60718293A0002 /* Tasks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1B2C3D4E5F60718293A0015 /* Build configuration list for PBXNativeTarget "Tasks" */;
+			buildPhases = (
+				A1B2C3D4E5F60718293A0006 /* Sources */,
+				A1B2C3D4E5F60718293A0008 /* Frameworks */,
+				A1B2C3D4E5F60718293A0007 /* Resources */,
+				A1B2C3D4E5F60718293A0009 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1B2C3D4E5F60718293A0013 /* PBXTargetDependency */,
+			);
+			name = Tasks;
+			productName = Tasks;
+			productReference = A1B2C3D4E5F60718293A0004 /* Tasks.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A1B2C3D4E5F60718293A0003 /* TasksWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1B2C3D4E5F60718293A0016 /* Build configuration list for PBXNativeTarget "TasksWidget" */;
+			buildPhases = (
+				A1B2C3D4E5F60718293A000A /* Sources */,
+				A1B2C3D4E5F60718293A000C /* Frameworks */,
+				A1B2C3D4E5F60718293A000B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TasksWidget;
+			productName = TasksWidget;
+			productReference = A1B2C3D4E5F60718293A0005 /* TasksWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1B2C3D4E5F60718293A0001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					A1B2C3D4E5F60718293A0002 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					A1B2C3D4E5F60718293A0003 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = A1B2C3D4E5F60718293A0017 /* Build configuration list for PBXProject "Tasks" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A1B2C3D4E5F60718293A000D;
+			productRefGroup = A1B2C3D4E5F60718293A000E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1B2C3D4E5F60718293A0002 /* Tasks */,
+				A1B2C3D4E5F60718293A0003 /* TasksWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1B2C3D4E5F60718293A0007 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D4E5F60718293A0060 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D4E5F60718293A000B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D4E5F60718293A0061 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1B2C3D4E5F60718293A0006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D4E5F60718293A0049 /* TasksApp.swift in Sources */,
+				A1B2C3D4E5F60718293A004B /* SessionController.swift in Sources */,
+				A1B2C3D4E5F60718293A004D /* ContentView.swift in Sources */,
+				A1B2C3D4E5F60718293A004F /* SidebarView.swift in Sources */,
+				A1B2C3D4E5F60718293A0051 /* TaskListView.swift in Sources */,
+				A1B2C3D4E5F60718293A0053 /* TaskRowView.swift in Sources */,
+				A1B2C3D4E5F60718293A0055 /* GoogleOAuth.swift in Sources */,
+				A1B2C3D4E5F60718293A0022 /* AppGroup.swift in Sources */,
+				A1B2C3D4E5F60718293A0025 /* Models.swift in Sources */,
+				A1B2C3D4E5F60718293A0028 /* GoogleAuthConfig.swift in Sources */,
+				A1B2C3D4E5F60718293A002B /* KeychainStore.swift in Sources */,
+				A1B2C3D4E5F60718293A002E /* SharedStore.swift in Sources */,
+				A1B2C3D4E5F60718293A0031 /* ListColor.swift in Sources */,
+				A1B2C3D4E5F60718293A0034 /* DateFormatting.swift in Sources */,
+				A1B2C3D4E5F60718293A0037 /* SampleData.swift in Sources */,
+				A1B2C3D4E5F60718293A003A /* TokenManager.swift in Sources */,
+				A1B2C3D4E5F60718293A003D /* GoogleTasksClient.swift in Sources */,
+				A1B2C3D4E5F60718293A0040 /* SyncService.swift in Sources */,
+				A1B2C3D4E5F60718293A0043 /* TaskIntents.swift in Sources */,
+				A1B2C3D4E5F60718293A0046 /* RemindersChrome.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1B2C3D4E5F60718293A000A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D4E5F60718293A0057 /* TasksWidget.swift in Sources */,
+				A1B2C3D4E5F60718293A0059 /* TasksWidgetBundle.swift in Sources */,
+				A1B2C3D4E5F60718293A0023 /* AppGroup.swift in Sources */,
+				A1B2C3D4E5F60718293A0026 /* Models.swift in Sources */,
+				A1B2C3D4E5F60718293A0029 /* GoogleAuthConfig.swift in Sources */,
+				A1B2C3D4E5F60718293A002C /* KeychainStore.swift in Sources */,
+				A1B2C3D4E5F60718293A002F /* SharedStore.swift in Sources */,
+				A1B2C3D4E5F60718293A0032 /* ListColor.swift in Sources */,
+				A1B2C3D4E5F60718293A0035 /* DateFormatting.swift in Sources */,
+				A1B2C3D4E5F60718293A0038 /* SampleData.swift in Sources */,
+				A1B2C3D4E5F60718293A003B /* TokenManager.swift in Sources */,
+				A1B2C3D4E5F60718293A003E /* GoogleTasksClient.swift in Sources */,
+				A1B2C3D4E5F60718293A0041 /* SyncService.swift in Sources */,
+				A1B2C3D4E5F60718293A0044 /* TaskIntents.swift in Sources */,
+				A1B2C3D4E5F60718293A0047 /* RemindersChrome.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A1B2C3D4E5F60718293A0013 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1B2C3D4E5F60718293A0003 /* TasksWidget */;
+			targetProxy = A1B2C3D4E5F60718293A0012 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A1B2C3D4E5F60718293A001C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A1B2C3D4E5F60718293A001D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A1B2C3D4E5F60718293A0018 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Tasks/Tasks.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Tasks/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Tasks;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.googletasks.Tasks;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A1B2C3D4E5F60718293A0019 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Tasks/Tasks.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Tasks/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Tasks;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.googletasks.Tasks;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A1B2C3D4E5F60718293A001A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TasksWidget/TasksWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TasksWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Tasks;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.googletasks.Tasks.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A1B2C3D4E5F60718293A001B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TasksWidget/TasksWidget.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TasksWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Tasks;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.googletasks.Tasks.Widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1B2C3D4E5F60718293A0017 /* Build configuration list for PBXProject "Tasks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1B2C3D4E5F60718293A001C /* Debug */,
+				A1B2C3D4E5F60718293A001D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1B2C3D4E5F60718293A0015 /* Build configuration list for PBXNativeTarget "Tasks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1B2C3D4E5F60718293A0018 /* Debug */,
+				A1B2C3D4E5F60718293A0019 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1B2C3D4E5F60718293A0016 /* Build configuration list for PBXNativeTarget "TasksWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1B2C3D4E5F60718293A001A /* Debug */,
+				A1B2C3D4E5F60718293A001B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1B2C3D4E5F60718293A0001 /* Project object */;
+}

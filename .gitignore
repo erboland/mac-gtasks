@@ -1,0 +1,22 @@
+# Xcode
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+build/
+
+# macOS
+.DS_Store
+
+# Secrets (keep GoogleAuthConfig.swift committed with placeholders)
+*.p12
+*.mobileprovision
+
+# Python
+__pycache__/
+.venv/
