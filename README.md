@@ -37,10 +37,18 @@ Until those two strings are filled in, the app and widget run against a local de
 
 ## 2. Build and run
 
-1. Open `Tasks.xcodeproj` in Xcode on your Mac.
-2. Select the **Tasks** scheme.
-3. Signing & Capabilities: pick your Team for both the **Tasks** and **TasksWidget** targets. Xcode should register the App Group `group.com.googletasks.Tasks`.
-4. Run (⌘R). Sign in with Google from the sidebar if you configured OAuth.
+The widget uses App Sandbox and an App Group, so Xcode will not run it with “Sign to Run Locally”. You need a development certificate. A free Apple ID is enough — you do not need a paid Developer Program membership to run this on your own Mac.
+
+1. Open `Tasks.xcodeproj` in Xcode.
+2. If you are not signed in: **Xcode → Settings → Accounts → + → Apple ID**.
+3. In the project navigator, click the blue **Tasks** project (top of the left sidebar).
+4. Select the **Tasks** target → **Signing & Capabilities**.
+5. Check **Automatically manage signing**.
+6. Set **Team** to your name (Personal Team). If the menu says *None*, choose **Add an Account…**.
+7. Select the **TasksWidget** target and repeat steps 5–6. Both targets must have the same Team.
+8. Choose the **Tasks** scheme and a **My Mac** destination, then Run (⌘R).
+
+If Xcode complains about the App Group `group.com.googletasks.Tasks`, open **Signing & Capabilities** on each target, click **+ Capability** → **App Groups**, and enable that group (or the `group.` identifier Xcode creates for your team). Update `Shared/AppGroup.swift` if the identifier changes.
 
 ## 3. Add the widget
 
