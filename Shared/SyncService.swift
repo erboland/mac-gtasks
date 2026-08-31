@@ -3,6 +3,7 @@ import WidgetKit
 
 enum SyncService {
     static func bootstrapDemoIfNeeded() {
+        if TokenFileStore.load() != nil { return }
         let current = SharedStore.load()
         if current.lists.isEmpty {
             SharedStore.save(SampleData.snapshot())
@@ -22,7 +23,6 @@ enum SyncService {
             snapshot.lists[listIndex].tasks[taskIndex].status = completed ? "completed" : "needsAction"
             snapshot.lists[listIndex].tasks[taskIndex].completed = completed ? Date() : nil
         }
-        WidgetCenter.shared.reloadTimelines(ofKind: AppGroup.widgetKind)
 
         let signedIn = await TokenManager.shared.currentTokens() != nil
         guard GoogleAuthConfig.isConfigured, signedIn else { return }
@@ -33,12 +33,12 @@ enum SyncService {
         }
     }
 
-    static func addTask(listId: String, title: String) async throws {
+    static func addTask(listId: String, title: String, notes: String? = nil, due: Date? = nil) async throws {
         let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
 
         if await TokenManager.shared.currentTokens() != nil, GoogleAuthConfig.isConfigured {
-            let created = try await GoogleTasksClient.insertTask(listId: listId, title: trimmed)
+            let created = try await GoogleTasksClient.insertTask(listId: listId, title: trimmed, notes: notes, due: due)
             SharedStore.mutate { snapshot in
                 guard let index = snapshot.lists.firstIndex(where: { $0.id == listId }) else { return }
                 snapshot.lists[index].tasks.insert(created, at: 0)
@@ -48,9 +48,9 @@ enum SyncService {
                 id: UUID().uuidString,
                 listId: listId,
                 title: trimmed,
-                notes: nil,
+                notes: notes,
                 status: "needsAction",
-                due: nil,
+                due: due,
                 completed: nil,
                 updated: Date(),
                 parent: nil,
@@ -62,7 +62,6 @@ enum SyncService {
                 snapshot.lists[index].tasks.insert(item, at: 0)
             }
         }
-        WidgetCenter.shared.reloadTimelines(ofKind: AppGroup.widgetKind)
     }
 
     static func deleteTask(listId: String, taskId: String) async {
@@ -70,7 +69,6 @@ enum SyncService {
             guard let index = snapshot.lists.firstIndex(where: { $0.id == listId }) else { return }
             snapshot.lists[index].tasks.removeAll { $0.id == taskId || $0.parent == taskId }
         }
-        WidgetCenter.shared.reloadTimelines(ofKind: AppGroup.widgetKind)
         let signedIn = await TokenManager.shared.currentTokens() != nil
         guard GoogleAuthConfig.isConfigured, signedIn else { return }
         try? await GoogleTasksClient.deleteTask(listId: listId, taskId: taskId)
@@ -83,7 +81,6 @@ enum SyncService {
             else { return }
             snapshot.lists[listIndex].tasks[taskIndex].title = title
         }
-        WidgetCenter.shared.reloadTimelines(ofKind: AppGroup.widgetKind)
         let signedIn = await TokenManager.shared.currentTokens() != nil
         guard GoogleAuthConfig.isConfigured, signedIn else { return }
         try? await GoogleTasksClient.updateTitle(listId: listId, taskId: taskId, title: title)

@@ -5,5 +5,6 @@ import WidgetKit
 struct TasksWidgetBundle: WidgetBundle {
     var body: some Widget {
         TasksWidget()
+        TasksBoardsWidget()
     }
 }

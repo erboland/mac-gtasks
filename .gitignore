@@ -13,9 +13,13 @@ build/
 # macOS
 .DS_Store
 
-# Secrets (keep GoogleAuthConfig.swift committed with placeholders)
+# Secrets — never commit real OAuth clients or tokens
+Shared/GoogleAuthSecrets.swift
+.secrets/
 *.p12
 *.mobileprovision
+.env
+.env.*
 
 # Python
 __pycache__/

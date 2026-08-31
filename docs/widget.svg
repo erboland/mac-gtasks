@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="372" viewBox="0 0 320 372" role="img" aria-labelledby="title">
+  <title id="title">Tasks widget</title>
+  <defs>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3a3a3c" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#2c2c2e" stop-opacity="0.98"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="319" height="371" rx="28" fill="url(#glass)" stroke="#ffffff" stroke-opacity="0.08"/>
+  <g transform="translate(22,22)">
+    <rect width="28" height="28" rx="7" fill="#FA6B2E"/>
+    <path d="M8 10.5h12M8 14.5h12M8 18.5h8" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
+    <text x="40" y="20" fill="#F5F5F7" font-family="-apple-system,BlinkMacSystemFont,Helvetica,sans-serif" font-size="18" font-weight="700">My Tasks</text>
+    <circle cx="268" cy="14" r="11" fill="none" stroke="#FA6B2E" stroke-width="1.6"/>
+    <path d="M264 14h8M268 10v8" stroke="#FA6B2E" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(22,72)" font-family="-apple-system,BlinkMacSystemFont,Helvetica,sans-serif">
+    <circle cx="13" cy="14" r="11" fill="none" stroke="#FA6B2E" stroke-width="1.7"/>
+    <text x="36" y="19" fill="#F5F5F7" font-size="15">Review the weekly plan</text>
+    <line x1="0" y1="36" x2="276" y2="36" stroke="#fff" stroke-opacity="0.08"/>
+    <circle cx="13" cy="58" r="11" fill="none" stroke="#FA6B2E" stroke-width="1.7"/>
+    <text x="36" y="63" fill="#F5F5F7" font-size="15">Reply to design notes</text>
+    <line x1="0" y1="80" x2="276" y2="80" stroke="#fff" stroke-opacity="0.08"/>
+    <circle cx="13" cy="102" r="11" fill="#FA6B2E"/>
+    <path d="M8 102.5l3.2 3.2 6.4-7" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="36" y="107" fill="#A1A1A6" font-size="15" text-decoration="line-through">Buy oat milk</text>
+    <line x1="0" y1="124" x2="276" y2="124" stroke="#fff" stroke-opacity="0.08"/>
+    <circle cx="13" cy="146" r="11" fill="none" stroke="#FA6B2E" stroke-width="1.7"/>
+    <text x="36" y="151" fill="#F5F5F7" font-size="15">Book a dentist visit</text>
+    <line x1="0" y1="168" x2="276" y2="168" stroke="#fff" stroke-opacity="0.08"/>
+    <circle cx="13" cy="190" r="11" fill="none" stroke="#FA6B2E" stroke-width="1.7"/>
+    <text x="36" y="195" fill="#F5F5F7" font-size="15">Water the plants</text>
+  </g>
+  <g transform="translate(22,300)" font-family="-apple-system,BlinkMacSystemFont,Helvetica,sans-serif">
+    <text x="0" y="20" fill="#8E8E93" font-size="13">9 1/2 :</text>
+    <text x="210" y="20" fill="#FA6B2E" font-size="13" font-weight="600">Completed</text>
+  </g>
+</svg>

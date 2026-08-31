@@ -1,15 +1,10 @@
 import Foundation
 
-/// Fill these in from Google Cloud Console → APIs & Services → Credentials.
-/// Create an OAuth 2.0 Client ID of type **Desktop app**, enable the Tasks API,
-/// then paste the client ID and secret below.
+/// OAuth endpoints and scopes. Put your client ID and secret in
+/// `GoogleAuthSecrets.swift` (copy from `GoogleAuthSecrets.example.swift`).
 enum GoogleAuthConfig {
-    /// Example: `123456789-abcdef.apps.googleusercontent.com`
-    static let clientID = "YOUR_CLIENT_ID.apps.googleusercontent.com"
-
-    /// Desktop OAuth clients include a client secret. It is not a server secret;
-    /// it is required for the token exchange on installed apps.
-    static let clientSecret = "YOUR_CLIENT_SECRET"
+    static var clientID: String { GoogleAuthSecrets.clientID }
+    static var clientSecret: String { GoogleAuthSecrets.clientSecret }
 
     static let scopes = [
         "https://www.googleapis.com/auth/tasks",

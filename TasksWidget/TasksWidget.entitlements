@@ -10,5 +10,14 @@
 	<array>
 		<string>group.com.googletasks.Tasks</string>
 	</array>
+	<key>com.apple.security.temporary-exception.files.home-relative-path.read-write</key>
+	<array>
+		<string>/Library/Group Containers/group.com.googletasks.Tasks/</string>
+		<string>/Library/Application Support/com.googletasks.Tasks/</string>
+	</array>
+	<key>com.apple.security.temporary-exception.shared-preference.read-write</key>
+	<array>
+		<string>group.com.googletasks.Tasks</string>
+	</array>
 </dict>
 </plist>

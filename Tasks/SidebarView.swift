@@ -10,19 +10,17 @@ struct SidebarView: View {
         )) {
             Section("My Lists") {
                 ForEach(session.snapshot.lists) { list in
-                    NavigationLink(value: list.id) {
-                        HStack(spacing: 10) {
-                            ListGlyph(color: ListColor.color(for: list.id), size: 28)
-                            VStack(alignment: .leading, spacing: 1) {
-                                Text(list.title)
-                                    .font(.body)
-                                Text("\(list.incompleteTasks.count)")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
+                    HStack(spacing: 10) {
+                        ListGlyph(color: ListColor.color(for: list.id), size: 28)
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(list.title)
+                                .font(.body)
+                            Text("\(list.incompleteTasks.count)")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
-                        .padding(.vertical, 2)
                     }
+                    .padding(.vertical, 2)
                     .tag(list.id)
                     .listRowInsets(EdgeInsets(top: 4, leading: 8, bottom: 4, trailing: 8))
                 }
@@ -32,13 +30,18 @@ struct SidebarView: View {
         .navigationTitle("Tasks")
         .toolbar {
             ToolbarItem(placement: .automatic) {
-                Button {
-                    Task { await session.refresh() }
-                } label: {
-                    Image(systemName: session.isSyncing ? "arrow.triangle.2.circlepath" : "arrow.clockwise")
+                if session.isSyncing {
+                    ProgressView()
+                        .controlSize(.small)
+                } else {
+                    Button {
+                        Task { await session.refresh() }
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .help("Refresh from Google Tasks")
+                    .disabled(!session.isSignedIn)
                 }
-                .help("Refresh from Google Tasks")
-                .disabled(session.isSyncing || !session.isSignedIn)
             }
         }
         .safeAreaInset(edge: .bottom) {
@@ -54,7 +57,9 @@ struct AccountFooter: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             if session.snapshot.isDemo {
-                Text(session.isConfigured ? "Showing sample tasks until you sign in." : "Demo list — add a Google OAuth client to sync.")
+                Text(session.isSignedIn
+                     ? "Syncing sample data."
+                     : "Showing sample tasks. Sign in to use your Google Tasks.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -78,12 +83,18 @@ struct AccountFooter: View {
                 Button {
                     Task { await session.signIn() }
                 } label: {
-                    Text(session.isConfigured ? "Sign in with Google" : "Sign in unavailable")
-                        .frame(maxWidth: .infinity)
+                    if session.isSigningIn {
+                        ProgressView()
+                            .controlSize(.small)
+                            .frame(maxWidth: .infinity)
+                    } else {
+                        Text(session.isConfigured ? "Sign in with Google" : "Sign in unavailable")
+                            .frame(maxWidth: .infinity)
+                    }
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(!session.isConfigured)
-                .help(session.isConfigured ? "Connect your Google Tasks account" : "Set your client ID in GoogleAuthConfig.swift")
+                .disabled(!session.isConfigured || session.isSigningIn)
+                .help(session.isConfigured ? "Connect your Google Tasks account" : "This build cannot sign in to Google.")
             }
         }
     }

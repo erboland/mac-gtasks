@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy · Tasks for Mac</title>
+  <meta name="description" content="Privacy policy for Tasks for Mac, a native Google Tasks widget.">
+  <link rel="icon" href="widget.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./">
+        <span class="mark" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3.5 5h9M3.5 8h9M3.5 11h6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </span>
+        Tasks
+      </a>
+      <nav>
+        <a href="https://github.com/erboland/mac-gtasks">Source</a>
+        <a href="./">Home</a>
+      </nav>
+    </header>
+
+    <article class="prose">
+      <h1>Privacy</h1>
+      <p>Tasks for Mac is a native macOS app and desktop widget that syncs with Google Tasks. It does not run its own servers. This page is the policy linked from Google’s OAuth consent screen.</p>
+
+      <h2>What the app asks Google for</h2>
+      <ul>
+        <li><code>https://www.googleapis.com/auth/tasks</code> — read and update your task lists</li>
+        <li><code>https://www.googleapis.com/auth/userinfo.email</code> — your account email, shown in the sidebar</li>
+      </ul>
+
+      <h2>Where data lives</h2>
+      <p>OAuth tokens and a local copy of your lists stay on your Mac, in the App Group and Application Support folder for <code>com.googletasks.Tasks</code>. Completing a task in the widget or the app sends that change to Google’s Tasks API. Nothing is sent to the author of this app.</p>
+
+      <h2>What it does not do</h2>
+      <p>No analytics SDK. No ads. No account besides the Google account you sign in with.</p>
+
+      <h2>Sign out</h2>
+      <p>Use Sign Out in the sidebar to delete local tokens and restore sample tasks.</p>
+
+      <h2>Contact</h2>
+      <p>Open an issue on <a href="https://github.com/erboland/mac-gtasks">github.com/erboland/mac-gtasks</a>.</p>
+    </article>
+
+    <footer>
+      <span>MIT License. Not affiliated with Apple or Google.</span>
+      <a href="./">Back to Tasks</a>
+    </footer>
+  </div>
+</body>
+</html>

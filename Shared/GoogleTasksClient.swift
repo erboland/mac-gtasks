@@ -59,7 +59,7 @@ enum GoogleTasksClient {
             var query = [
                 URLQueryItem(name: "maxResults", value: "100"),
                 URLQueryItem(name: "showCompleted", value: "true"),
-                URLQueryItem(name: "showHidden", value: "false")
+                URLQueryItem(name: "showHidden", value: "true")
             ]
             if let pageToken { query.append(URLQueryItem(name: "pageToken", value: pageToken)) }
             components.queryItems = query
@@ -92,7 +92,10 @@ enum GoogleTasksClient {
 
     static func setCompleted(listId: String, taskId: String, completed: Bool) async throws {
         let url = GoogleAuthConfig.tasksAPIBase.appending(path: "lists/\(listId)/tasks/\(taskId)")
-        let payload = ["status": completed ? "completed" : "needsAction"]
+        let payload = TaskStatusPatch(
+            status: completed ? "completed" : "needsAction",
+            completed: completed ? ISO8601DateFormatter.internet.string(from: Date()) : nil
+        )
         let body = try JSONEncoder().encode(payload)
         let request = try await authorizedRequest(url: url, method: "PATCH", body: body)
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -161,6 +164,11 @@ struct GTaskList: Decodable {
 struct GTasks: Decodable {
     var items: [GTask]?
     var nextPageToken: String?
+}
+
+private struct TaskStatusPatch: Encodable {
+    var status: String
+    var completed: String?
 }
 
 struct GTask: Decodable {

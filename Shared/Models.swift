@@ -19,6 +19,20 @@ struct TasksSnapshot: Codable, Equatable, Sendable {
     func list(id: String) -> TaskList? {
         lists.first(where: { $0.id == id })
     }
+
+    /// Keep open tasks plus recent completed so the widget can show Done and animate checks.
+    func compactedForWidget(maxCompletedPerList: Int = 40) -> TasksSnapshot {
+        var copy = self
+        copy.lists = lists.map { list in
+            var trimmed = list
+            let open = list.incompleteTasks
+            let done = Array(list.completedTasks.sorted { ($0.completed ?? .distantPast) > ($1.completed ?? .distantPast) }.prefix(maxCompletedPerList))
+            trimmed.tasks = open + done
+            trimmed.openTaskCount = open.count
+            return trimmed
+        }
+        return copy
+    }
 }
 
 struct TaskList: Codable, Equatable, Identifiable, Hashable, Sendable {
@@ -26,9 +40,14 @@ struct TaskList: Codable, Equatable, Identifiable, Hashable, Sendable {
     var title: String
     var updated: Date?
     var tasks: [TaskItem]
+    var openTaskCount: Int? = nil
 
     var incompleteTasks: [TaskItem] {
         tasks.filter { !$0.isCompleted && $0.parent == nil }
+    }
+
+    var displayedOpenCount: Int {
+        openTaskCount ?? incompleteTasks.count
     }
 
     var completedTasks: [TaskItem] {
@@ -61,6 +80,11 @@ struct TaskItem: Codable, Equatable, Identifiable, Hashable, Sendable {
         let value = title.trimmingCharacters(in: .whitespacesAndNewlines)
         return value.isEmpty ? "New Task" : value
     }
+}
+
+struct FadingCompletion: Codable, Equatable, Sendable {
+    var task: TaskItem
+    var completedAt: Date
 }
 
 struct OAuthTokens: Codable, Equatable, Sendable {

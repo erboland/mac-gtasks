@@ -3,6 +3,7 @@ import SwiftUI
 struct TaskListView: View {
     @EnvironmentObject private var session: SessionController
     @State private var draft = ""
+    @State private var readyForListId: String?
     @FocusState private var addFocused: Bool
 
     var body: some View {
@@ -10,10 +11,16 @@ struct TaskListView: View {
             if let list = session.selectedList {
                 header(list)
                 Divider()
-                if list.tasks.isEmpty {
-                    emptyState(list)
+                if showTaskRows {
+                    if list.incompleteTasks.isEmpty && (!session.showCompleted || list.completedTasks.isEmpty) {
+                        emptyState(list)
+                    } else {
+                        listBody(list)
+                    }
                 } else {
-                    listBody(list)
+                    ProgressView()
+                        .controlSize(.regular)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 addBar
             } else {
@@ -21,6 +28,26 @@ struct TaskListView: View {
             }
         }
         .background(Color(nsColor: .windowBackgroundColor))
+        .task(id: "\(session.selectedListId ?? "")-\(session.showCompleted)") {
+            let id = session.selectedListId
+            if shouldDeferHeavyList {
+                await Task.yield()
+            }
+            guard !Task.isCancelled, session.selectedListId == id else { return }
+            readyForListId = id
+        }
+        .animation(nil, value: session.selectedListId)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    session.beginCompose(listId: session.selectedListId)
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .help("New Task")
+                .disabled(session.selectedList == nil)
+            }
+        }
         .onChange(of: session.focusAddField) { _, focused in
             if focused {
                 addFocused = true
@@ -29,7 +56,19 @@ struct TaskListView: View {
         }
         .onChange(of: session.selectedListId) { _, _ in
             draft = ""
+            readyForListId = nil
         }
+    }
+
+    private var shouldDeferHeavyList: Bool {
+        guard let list = session.selectedList, session.showCompleted else { return false }
+        return list.tasks.count > 40
+    }
+
+    private var showTaskRows: Bool {
+        guard let id = session.selectedListId else { return false }
+        if !shouldDeferHeavyList { return true }
+        return readyForListId == id
     }
 
     private func header(_ list: TaskList) -> some View {
@@ -42,7 +81,15 @@ struct TaskListView: View {
                     .foregroundStyle(color)
                 HStack(spacing: 8) {
                     Text("\(list.incompleteTasks.count) open")
-                    if let synced = session.snapshot.lastSyncedAt {
+                    if !list.completedTasks.isEmpty {
+                        Text("·")
+                        Text("\(list.completedTasks.count) completed")
+                    }
+                    if session.isSyncing {
+                        Text("·")
+                        ProgressView()
+                            .controlSize(.small)
+                    } else if let synced = session.snapshot.lastSyncedAt {
                         Text("·")
                         Text(session.snapshot.isDemo ? "Demo" : "Updated \(synced.formatted(date: .omitted, time: .shortened))")
                     }
@@ -51,6 +98,15 @@ struct TaskListView: View {
                 .foregroundStyle(.secondary)
             }
             Spacer()
+            Button {
+                session.beginCompose(listId: list.id)
+            } label: {
+                Image(systemName: "plus.circle.fill")
+                    .font(.title2)
+                    .foregroundStyle(color)
+            }
+            .buttonStyle(.plain)
+            .help("New Task")
             Toggle("Show Completed", isOn: $session.showCompleted)
                 .toggleStyle(.checkbox)
                 .font(.callout)
@@ -60,31 +116,44 @@ struct TaskListView: View {
     }
 
     private func listBody(_ list: TaskList) -> some View {
-        List {
-            ForEach(list.incompleteTasks) { task in
-                TaskRowView(task: task, color: ListColor.color(for: list.id), subtasks: list.subtasks(of: task.id))
-                    .listRowSeparator(.visible)
-                    .listRowInsets(EdgeInsets(top: 4, leading: 20, bottom: 4, trailing: 20))
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        Button(role: .destructive) {
-                            Task { await session.delete(task) }
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                        }
-                    }
-            }
+        let open = session.openTasks(in: list)
+        let completed = session.showCompleted ? session.completedTasks(in: list) : []
+        return ScrollView {
+            LazyVStack(alignment: .leading, spacing: 0) {
+                ForEach(open) { task in
+                    TaskRowView(task: task, color: ListColor.color(for: list.id), subtasks: list.subtasks(of: task.id))
+                    Divider()
+                }
 
-            if session.showCompleted, !list.completedTasks.isEmpty {
-                Section("Completed") {
-                    ForEach(list.completedTasks) { task in
-                        TaskRowView(task: task, color: ListColor.color(for: list.id), subtasks: [])
-                            .listRowInsets(EdgeInsets(top: 4, leading: 20, bottom: 4, trailing: 20))
+                if session.showCompleted {
+                    HStack {
+                        Text("Completed (\(list.completedTasks.count))")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                    }
+                    .padding(.top, 18)
+                    .padding(.bottom, 8)
+
+                    if completed.isEmpty {
+                        Text("No completed tasks")
+                            .foregroundStyle(.secondary)
+                            .padding(.vertical, 8)
+                    } else {
+                        ForEach(completed) { task in
+                            TaskRowView(task: task, color: ListColor.color(for: list.id), subtasks: [])
+                            Divider()
+                        }
                     }
                 }
             }
+            .padding(.horizontal, 20)
+            .padding(.bottom, 12)
         }
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
+        .id(list.id)
+        .refreshable {
+            await session.refresh()
+        }
     }
 
     private func emptyState(_ list: TaskList) -> some View {
@@ -120,5 +189,65 @@ struct TaskListView: View {
         .padding(.horizontal, 24)
         .padding(.vertical, 12)
         .background(.bar)
+    }
+}
+
+struct ComposeTaskSheet: View {
+    @EnvironmentObject private var session: SessionController
+    @Environment(\.dismiss) private var dismiss
+    @State private var title = ""
+    @State private var notes = ""
+    @State private var hasDue = false
+    @State private var due = Date()
+    @FocusState private var titleFocused: Bool
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("New Task")
+                .font(.title2.weight(.semibold))
+            if let list = session.selectedList {
+                Text(list.title)
+                    .font(.subheadline)
+                    .foregroundStyle(ListColor.color(for: list.id))
+            }
+            TextField("Title", text: $title)
+                .textFieldStyle(.roundedBorder)
+                .focused($titleFocused)
+                .onSubmit { submit() }
+            TextField("Notes", text: $notes, axis: .vertical)
+                .textFieldStyle(.roundedBorder)
+                .lineLimit(3...6)
+            Toggle("Due date", isOn: $hasDue)
+            if hasDue {
+                DatePicker("Due", selection: $due, displayedComponents: .date)
+                    .datePickerStyle(.graphical)
+            }
+            HStack {
+                Spacer()
+                Button("Cancel") { dismiss() }
+                    .keyboardShortcut(.cancelAction)
+                Button("Add") { submit() }
+                    .keyboardShortcut(.defaultAction)
+                    .disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    .buttonStyle(.borderedProminent)
+            }
+        }
+        .padding(24)
+        .frame(minWidth: 420)
+        .onAppear { titleFocused = true }
+    }
+
+    private func submit() {
+        let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        let note = notes.trimmingCharacters(in: .whitespacesAndNewlines)
+        Task {
+            await session.addTask(
+                title: trimmed,
+                notes: note.isEmpty ? nil : note,
+                due: hasDue ? due : nil
+            )
+        }
+        dismiss()
     }
 }

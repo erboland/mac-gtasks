@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tasks for Mac</title>
+  <meta name="description" content="A native macOS widget for Google Tasks. Looks like Reminders. Check items off from the desktop.">
+  <meta property="og:title" content="Tasks for Mac">
+  <meta property="og:description" content="Google Tasks on the Mac desktop, in the language of Reminders.">
+  <meta property="og:image" content="https://erboland.github.io/mac-gtasks/widget.svg">
+  <meta name="theme-color" content="#0e0e10">
+  <link rel="icon" href="widget.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="./">
+        <span class="mark" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3.5 5h9M3.5 8h9M3.5 11h6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </span>
+        Tasks
+      </a>
+      <nav>
+        <a href="https://github.com/erboland/mac-gtasks">Source</a>
+        <a href="https://github.com/erboland/mac-gtasks/releases/latest">Releases</a>
+        <a href="./privacy.html">Privacy</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>Google Tasks,<br>on the desktop.</h1>
+        <p class="lede">
+          A Mac widget that borrows Reminders’ circles, colors, and quiet list.
+          Open the app when you need every list. Check things off without opening a browser.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://github.com/erboland/mac-gtasks/releases/latest">Download for Mac</a>
+          <a class="btn btn-ghost" href="https://github.com/erboland/mac-gtasks">View source</a>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="desk" aria-hidden="true"></div>
+        <img class="widget" src="widget.svg" width="320" height="372" alt="Tasks desktop widget with a few open reminders and one completed item">
+      </div>
+    </section>
+
+    <section class="features">
+      <article class="card">
+        <h2>Widget first</h2>
+        <p>Small through extra large. Circular checkboxes, due dates, and a Completed toggle. Completing a row talks to Google Tasks immediately.</p>
+      </article>
+      <article class="card">
+        <h2>Companion app</h2>
+        <p>Sidebar of lists, strikethrough on done, Show Completed, new reminder field. Same orange, green, and red list colors as Reminders.</p>
+      </article>
+      <article class="card">
+        <h2>Your Google account</h2>
+        <p>Sign in once. Tokens stay on the Mac so the widget still works when the window is closed. Sign out deletes them.</p>
+      </article>
+    </section>
+
+    <section class="how">
+      <div>
+        <h2>Install, then leave it on the desktop.</h2>
+        <p>macOS 14 or later. After the first launch, the widget shows up in Edit Widgets.</p>
+      </div>
+      <ol>
+        <li><span><strong>Get the disk image</strong> from Releases and drag Tasks into Applications.</span></li>
+        <li><span><strong>Open the app</strong> and walk through onboarding. This is a widget with a window attached, not the other way around.</span></li>
+        <li><span><strong>Sign in with Google</strong> so lists stay in sync.</span></li>
+        <li><span><strong>Control-click the desktop</strong> → Edit Widgets → search Tasks → add List.</span></li>
+      </ol>
+      <p class="note">Until the build is notarized, macOS may ask you to Control-click the app and choose Open. Until Google verifies the OAuth client, only listed test users can sign in.</p>
+    </section>
+
+    <footer>
+      <span>MIT License. Not affiliated with Apple or Google.</span>
+      <span>
+        <a href="https://github.com/erboland/mac-gtasks">erboland/mac-gtasks</a>
+        ·
+        <a href="./privacy.html">Privacy</a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>

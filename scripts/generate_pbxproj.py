@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""Regenerates Tasks.xcodeproj/project.pbxproj.
+
+The live project also has a "Copy GoogleAuthSecrets if needed" run script
+(A1B2C3D4E5F60718293A0073 / 0074). Re-add it if you regenerate this file.
+"""
 import os
 
 ids = {
@@ -37,6 +42,7 @@ shared_files = [
     "AppGroup.swift",
     "Models.swift",
     "GoogleAuthConfig.swift",
+    "GoogleAuthSecrets.swift",
     "KeychainStore.swift",
     "SharedStore.swift",
     "ListColor.swift",
@@ -57,6 +63,7 @@ app_files = [
     "TaskListView.swift",
     "TaskRowView.swift",
     "GoogleOAuth.swift",
+    "OnboardingView.swift",
 ]
 
 widget_files = [

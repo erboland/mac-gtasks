@@ -14,6 +14,8 @@
 		A1B2C3D4E5F60718293A0026 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0024 /* Models.swift */; };
 		A1B2C3D4E5F60718293A0028 /* GoogleAuthConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0027 /* GoogleAuthConfig.swift */; };
 		A1B2C3D4E5F60718293A0029 /* GoogleAuthConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0027 /* GoogleAuthConfig.swift */; };
+		A1B2C3D4E5F60718293A0071 /* GoogleAuthSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0070 /* GoogleAuthSecrets.swift */; };
+		A1B2C3D4E5F60718293A0072 /* GoogleAuthSecrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0070 /* GoogleAuthSecrets.swift */; };
 		A1B2C3D4E5F60718293A002B /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A002A /* KeychainStore.swift */; };
 		A1B2C3D4E5F60718293A002C /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A002A /* KeychainStore.swift */; };
 		A1B2C3D4E5F60718293A002E /* SharedStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A002D /* SharedStore.swift */; };
@@ -41,6 +43,7 @@
 		A1B2C3D4E5F60718293A0051 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0050 /* TaskListView.swift */; };
 		A1B2C3D4E5F60718293A0053 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0052 /* TaskRowView.swift */; };
 		A1B2C3D4E5F60718293A0055 /* GoogleOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0054 /* GoogleOAuth.swift */; };
+		A1B2C3D4E5F60718293A0076 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0075 /* OnboardingView.swift */; };
 		A1B2C3D4E5F60718293A0057 /* TasksWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0056 /* TasksWidget.swift */; };
 		A1B2C3D4E5F60718293A0059 /* TasksWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A0058 /* TasksWidgetBundle.swift */; };
 		A1B2C3D4E5F60718293A0060 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A005A /* Assets.xcassets */; };
@@ -77,6 +80,7 @@
 		A1B2C3D4E5F60718293A0021 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A0024 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A0027 /* GoogleAuthConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthConfig.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0070 /* GoogleAuthSecrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthSecrets.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A002A /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A002D /* SharedStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedStore.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A0030 /* ListColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListColor.swift; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 		A1B2C3D4E5F60718293A0050 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A0052 /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A0054 /* GoogleOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleOAuth.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A0075 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A0056 /* TasksWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksWidget.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A0058 /* TasksWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksWidgetBundle.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A005A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -151,6 +156,7 @@
 				A1B2C3D4E5F60718293A0050 /* TaskListView.swift */,
 				A1B2C3D4E5F60718293A0052 /* TaskRowView.swift */,
 				A1B2C3D4E5F60718293A0054 /* GoogleOAuth.swift */,
+				A1B2C3D4E5F60718293A0075 /* OnboardingView.swift */,
 				A1B2C3D4E5F60718293A005A /* Assets.xcassets */,
 				A1B2C3D4E5F60718293A005B /* Tasks.entitlements */,
 				A1B2C3D4E5F60718293A005C /* Info.plist */,
@@ -176,6 +182,7 @@
 				A1B2C3D4E5F60718293A0021 /* AppGroup.swift */,
 				A1B2C3D4E5F60718293A0024 /* Models.swift */,
 				A1B2C3D4E5F60718293A0027 /* GoogleAuthConfig.swift */,
+				A1B2C3D4E5F60718293A0070 /* GoogleAuthSecrets.swift */,
 				A1B2C3D4E5F60718293A002A /* KeychainStore.swift */,
 				A1B2C3D4E5F60718293A002D /* SharedStore.swift */,
 				A1B2C3D4E5F60718293A0030 /* ListColor.swift */,
@@ -197,6 +204,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1B2C3D4E5F60718293A0015 /* Build configuration list for PBXNativeTarget "Tasks" */;
 			buildPhases = (
+				A1B2C3D4E5F60718293A0073 /* Copy GoogleAuthSecrets if needed */,
 				A1B2C3D4E5F60718293A0006 /* Sources */,
 				A1B2C3D4E5F60718293A0008 /* Frameworks */,
 				A1B2C3D4E5F60718293A0007 /* Resources */,
@@ -216,6 +224,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1B2C3D4E5F60718293A0016 /* Build configuration list for PBXNativeTarget "TasksWidget" */;
 			buildPhases = (
+				A1B2C3D4E5F60718293A0074 /* Copy GoogleAuthSecrets if needed */,
 				A1B2C3D4E5F60718293A000A /* Sources */,
 				A1B2C3D4E5F60718293A000C /* Frameworks */,
 				A1B2C3D4E5F60718293A000B /* Resources */,
@@ -297,9 +306,11 @@
 				A1B2C3D4E5F60718293A0051 /* TaskListView.swift in Sources */,
 				A1B2C3D4E5F60718293A0053 /* TaskRowView.swift in Sources */,
 				A1B2C3D4E5F60718293A0055 /* GoogleOAuth.swift in Sources */,
+				A1B2C3D4E5F60718293A0076 /* OnboardingView.swift in Sources */,
 				A1B2C3D4E5F60718293A0022 /* AppGroup.swift in Sources */,
 				A1B2C3D4E5F60718293A0025 /* Models.swift in Sources */,
 				A1B2C3D4E5F60718293A0028 /* GoogleAuthConfig.swift in Sources */,
+				A1B2C3D4E5F60718293A0071 /* GoogleAuthSecrets.swift in Sources */,
 				A1B2C3D4E5F60718293A002B /* KeychainStore.swift in Sources */,
 				A1B2C3D4E5F60718293A002E /* SharedStore.swift in Sources */,
 				A1B2C3D4E5F60718293A0031 /* ListColor.swift in Sources */,
@@ -322,6 +333,7 @@
 				A1B2C3D4E5F60718293A0023 /* AppGroup.swift in Sources */,
 				A1B2C3D4E5F60718293A0026 /* Models.swift in Sources */,
 				A1B2C3D4E5F60718293A0029 /* GoogleAuthConfig.swift in Sources */,
+				A1B2C3D4E5F60718293A0072 /* GoogleAuthSecrets.swift in Sources */,
 				A1B2C3D4E5F60718293A002C /* KeychainStore.swift in Sources */,
 				A1B2C3D4E5F60718293A002F /* SharedStore.swift in Sources */,
 				A1B2C3D4E5F60718293A0032 /* ListColor.swift in Sources */,
@@ -336,6 +348,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A1B2C3D4E5F60718293A0073 /* Copy GoogleAuthSecrets if needed */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy GoogleAuthSecrets if needed";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SECRETS=\"${SRCROOT}/Shared/GoogleAuthSecrets.swift\"\nEXAMPLE=\"${SRCROOT}/Shared/GoogleAuthSecrets.example.swift\"\nif [ ! -f \"$SECRETS\" ]; then\n  cp \"$EXAMPLE\" \"$SECRETS\"\nfi\n";
+		};
+		A1B2C3D4E5F60718293A0074 /* Copy GoogleAuthSecrets if needed */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy GoogleAuthSecrets if needed";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SECRETS=\"${SRCROOT}/Shared/GoogleAuthSecrets.swift\"\nEXAMPLE=\"${SRCROOT}/Shared/GoogleAuthSecrets.example.swift\"\nif [ ! -f \"$SECRETS\" ]; then\n  cp \"$EXAMPLE\" \"$SECRETS\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		A1B2C3D4E5F60718293A0013 /* PBXTargetDependency */ = {
@@ -355,7 +408,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VSS9425YLD;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -385,7 +438,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VSS9425YLD;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -412,8 +465,9 @@
 				CODE_SIGN_ENTITLEMENTS = TasksWidget/TasksWidget.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VSS9425YLD;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TasksWidget/Info.plist;
@@ -440,8 +494,9 @@
 				CODE_SIGN_ENTITLEMENTS = TasksWidget/TasksWidget.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = VSS9425YLD;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TasksWidget/Info.plist;
