@@ -1,0 +1,42 @@
+name: Release DMG
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  dmg:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write Google OAuth client
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+        run: |
+          if [ -z "$GOOGLE_CLIENT_ID" ] || [ -z "$GOOGLE_CLIENT_SECRET" ]; then
+            echo "Set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET as repository secrets." >&2
+            exit 1
+          fi
+          cat > Shared/GoogleAuthSecrets.swift <<EOF
+          import Foundation
+          enum GoogleAuthSecrets {
+              static let clientID = "$GOOGLE_CLIENT_ID"
+              static let clientSecret = "$GOOGLE_CLIENT_SECRET"
+          }
+          EOF
+
+      - name: Build DMG
+        run: bash scripts/package-dmg.sh
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/Tasks.dmg
+          generate_release_notes: true
+          draft: false
