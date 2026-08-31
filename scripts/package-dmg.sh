@@ -22,13 +22,26 @@ DMG="$ROOT/build/Tasks.dmg"
 rm -rf "$DERIVED" "$STAGE" "$DMG"
 mkdir -p "$STAGE"
 
-xcodebuild \
-  -project Tasks.xcodeproj \
-  -scheme Tasks \
-  -configuration Release \
-  -destination 'platform=macOS' \
-  -derivedDataPath "$DERIVED" \
-  build
+xcodebuild_args=(
+  -project Tasks.xcodeproj
+  -scheme Tasks
+  -configuration Release
+  -destination 'platform=macOS'
+  -derivedDataPath "$DERIVED"
+)
+
+if [[ "${CI:-}" == "true" ]]; then
+  # GitHub-hosted runners do not have a Developer ID. Ad-hoc sign so the
+  # archive still produces Tasks.app. Other Macs will need Control-click → Open.
+  xcodebuild_args+=(
+    CODE_SIGN_IDENTITY="-"
+    CODE_SIGNING_ALLOWED=YES
+    CODE_SIGNING_REQUIRED=YES
+    DEVELOPMENT_TEAM=
+  )
+fi
+
+xcodebuild "${xcodebuild_args[@]}" build
 
 APP="$DERIVED/Build/Products/Release/Tasks.app"
 if [[ ! -d "$APP" ]]; then
