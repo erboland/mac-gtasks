@@ -1,5 +1,4 @@
 import SwiftUI
-import WidgetKit
 
 @main
 struct TasksApp: App {
@@ -27,8 +26,11 @@ struct TasksApp: App {
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
                     session.consumePendingCompose()
-                    WidgetCenter.shared.reloadAllTimelines()
+                    Task { await session.refresh(userInitiated: false) }
                 }
+            }
+            .onReceive(DistributedNotificationCenter.default().publisher(for: AppGroup.snapshotDidChange)) { _ in
+                session.reloadFromDisk()
             }
         }
         .handlesExternalEvents(matching: ["*"])

@@ -20,6 +20,7 @@ enum AppGroup {
     static let widgetKindLegacy = "TasksBoardsWidget"
     static let urlScheme = "googletasks"
     static let composeNotification = Notification.Name("com.googletasks.Tasks.composeNewTask")
+    static let snapshotDidChange = Notification.Name("com.googletasks.Tasks.snapshotDidChange")
     static let supportFolder = "com.googletasks.Tasks"
 
     static func newTaskURL(listId: String) -> URL {

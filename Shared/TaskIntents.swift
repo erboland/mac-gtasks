@@ -221,3 +221,30 @@ struct ShowListsIntent: AppIntent {
         return .result()
     }
 }
+
+struct RefreshTasksIntent: AppIntent {
+    static var title: LocalizedStringResource = "Refresh Tasks"
+    static var description = IntentDescription("Pulls the latest lists from Google Tasks.")
+    static var isDiscoverable = false
+    static var openAppWhenRun = false
+
+    /// WidgetKit on macOS is more reliable when interactive intents have a parameter.
+    @Parameter(title: "List")
+    var listId: String
+
+    init() {}
+
+    init(listId: String) {
+        self.listId = listId
+    }
+
+    func perform() async throws -> some IntentResult {
+        do {
+            try await SyncService.syncFromGoogle()
+        } catch {
+            NSLog("Widget refresh failed: \(error.localizedDescription)")
+            SharedStore.reloadWidgets()
+        }
+        return .result()
+    }
+}

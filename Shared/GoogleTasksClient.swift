@@ -12,11 +12,7 @@ enum GoogleTasksClient {
 
     static func fetchAll() async throws -> TasksSnapshot {
         let lists = try await fetchTaskLists()
-        var hydrated: [TaskList] = []
-        for list in lists {
-            let tasks = try await fetchTasks(listId: list.id)
-            hydrated.append(TaskList(id: list.id, title: list.title ?? "Untitled", updated: DateParser.date(list.updated), tasks: tasks))
-        }
+        let hydrated = try await fetchAllTasks(for: lists)
         let emailFromProfile = try? await fetchUserEmail()
         let emailFromTokens = await TokenManager.shared.currentTokens()?.email
         let email = emailFromProfile ?? emailFromTokens
@@ -28,6 +24,44 @@ enum GoogleTasksClient {
             selectedListId: previous ?? hydrated.first?.id,
             lastSyncedAt: Date()
         )
+    }
+
+    private static func fetchAllTasks(for lists: [GTaskList]) async throws -> [TaskList] {
+        if lists.isEmpty { return [] }
+        var slots = [TaskList?](repeating: nil, count: lists.count)
+        try await withThrowingTaskGroup(of: (Int, TaskList).self) { group in
+            var nextIndex = 0
+            let workerCount = min(4, lists.count)
+
+            func enqueue(_ index: Int) {
+                let list = lists[index]
+                group.addTask {
+                    let tasks = try await fetchTasks(listId: list.id)
+                    return (
+                        index,
+                        TaskList(
+                            id: list.id,
+                            title: list.title ?? "Untitled",
+                            updated: DateParser.date(list.updated),
+                            tasks: tasks
+                        )
+                    )
+                }
+            }
+
+            while nextIndex < workerCount {
+                enqueue(nextIndex)
+                nextIndex += 1
+            }
+            for try await (index, list) in group {
+                slots[index] = list
+                if nextIndex < lists.count {
+                    enqueue(nextIndex)
+                    nextIndex += 1
+                }
+            }
+        }
+        return slots.compactMap { $0 }
     }
 
     static func fetchTaskLists() async throws -> [GTaskList] {

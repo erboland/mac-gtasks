@@ -35,23 +35,21 @@ struct TasksProvider: AppIntentTimelineProvider {
     }
 
     func timeline(for configuration: ListConfigurationIntent, in context: Context) async -> Timeline<TasksEntry> {
+        await SyncService.syncFromGoogleIfNeeded(
+            minInterval: SyncService.automaticInterval,
+            reloadWidgets: false
+        )
         let now = Date()
         let first = await currentEntry(for: configuration, at: now)
         var entries = [first]
         if SharedStore.hasFadingCompletions(at: now) {
             entries.append(await currentEntry(for: configuration, at: now.addingTimeInterval(SharedStore.fadeDuration)))
         }
-        return Timeline(entries: entries, policy: .after(now.addingTimeInterval(15 * 60)))
+        return Timeline(entries: entries, policy: .after(now.addingTimeInterval(SyncService.widgetReloadInterval)))
     }
 
     private func currentEntry(for configuration: ListConfigurationIntent, at date: Date = Date()) async -> TasksEntry {
-        var snapshot = SharedStore.loadForWidget()
-        if snapshot.lists.isEmpty, TokenFileStore.load() != nil {
-            if let remote = try? await GoogleTasksClient.fetchAll() {
-                SharedStore.save(remote)
-                snapshot = remote
-            }
-        }
+        let snapshot = SharedStore.loadForWidget()
         return entry(from: snapshot, intent: configuration, date: date, placeholder: false)
     }
 
@@ -133,10 +131,15 @@ struct TasksWidgetEntryView: View {
                     now: entry.date,
                     showsListSwitcher: !entry.boards.isEmpty,
                     pageOffset: entry.pageOffset,
-                    showingCompleted: entry.showingCompleted
+                    showingCompleted: entry.showingCompleted,
+                    showsRefresh: entry.isSignedIn && !entry.isDemo
                 )
             } else if !entry.boards.isEmpty || entry.isSignedIn {
-                WidgetBoardPicker(boards: entry.boards, family: family)
+                WidgetBoardPicker(
+                    boards: entry.boards,
+                    family: family,
+                    showsRefresh: entry.isSignedIn && !entry.isDemo
+                )
             } else {
                 emptySignIn
             }
@@ -160,18 +163,34 @@ struct TasksWidgetEntryView: View {
 struct WidgetBoardPicker: View {
     var boards: [TaskList]
     var family: WidgetFamily
+    var showsRefresh = false
 
     private var metrics: WidgetMetrics { WidgetMetrics.forFamily(family) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("My Lists")
-                .font(.system(size: metrics.titleFont, weight: .semibold))
-                .foregroundStyle(ListColor.remindersOrange)
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
-                .widgetAccentable()
-                .padding(.bottom, metrics.headerSpacing)
+            HStack(spacing: 8) {
+                Text("My Lists")
+                    .font(.system(size: metrics.titleFont, weight: .semibold))
+                    .foregroundStyle(ListColor.remindersOrange)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+                    .widgetAccentable()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                if showsRefresh {
+                    Button(intent: RefreshTasksIntent(listId: "lists")) {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(ListColor.remindersOrange)
+                            .frame(width: 22, height: 22)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .widgetAccentable()
+                    .invalidatableContent()
+                }
+            }
+            .padding(.bottom, metrics.headerSpacing)
 
             if boards.isEmpty {
                 Text("Open Tasks to refresh your lists")
@@ -329,6 +348,7 @@ struct RemindersListWidgetLayout: View {
     var showsListSwitcher = false
     var pageOffset = 0
     var showingCompleted = false
+    var showsRefresh = false
 
     private var metrics: WidgetMetrics { WidgetMetrics.forFamily(family) }
 
@@ -412,6 +432,19 @@ struct RemindersListWidgetLayout: View {
             .disabled(!showsListSwitcher)
             .frame(maxWidth: .infinity, alignment: .leading)
             .invalidatableContent()
+
+            if showsRefresh {
+                Button(intent: RefreshTasksIntent(listId: list.id)) {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(color)
+                        .frame(width: 22, height: 22)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .widgetAccentable()
+                .invalidatableContent()
+            }
 
             Link(destination: AppGroup.newTaskURL(listId: list.id)) {
                 Image(systemName: "plus")

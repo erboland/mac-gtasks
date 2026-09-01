@@ -18,6 +18,12 @@ enum SharedStore {
     private static var persistGeneration = 0
     private static let persistQueue = DispatchQueue(label: "com.googletasks.Tasks.store", qos: .utility)
 
+    static func invalidateCache() {
+        lock.lock()
+        cached = nil
+        lock.unlock()
+    }
+
     static func load() -> TasksSnapshot {
         lock.lock()
         if let cached {
@@ -45,6 +51,14 @@ enum SharedStore {
     }
 
     static func loadForWidget() -> TasksSnapshot {
+        lock.lock()
+        if let cached, !cached.lists.isEmpty {
+            let snapshot = cached.compactedForWidget()
+            lock.unlock()
+            return applyPersistedSelection(snapshot)
+        }
+        lock.unlock()
+
         for url in AppGroup.snapshotCandidates {
             if let snapshot = decodeSnapshot(at: url), !snapshot.lists.isEmpty {
                 return snapshot
@@ -275,7 +289,7 @@ enum SharedStore {
         }
     }
 
-    static func save(_ snapshot: TasksSnapshot) {
+    static func save(_ snapshot: TasksSnapshot, reloadWidgets reload: Bool = true) {
         let snapshot = applyPersistedSelection(snapshot)
         lock.lock()
         cached = snapshot
@@ -288,7 +302,10 @@ enum SharedStore {
             lock.unlock()
             guard generation == latest else { return }
             persistToDisk(snapshot)
-            reloadWidgets()
+            notifySnapshotChanged()
+            if reload {
+                reloadWidgets()
+            }
         }
     }
 
@@ -357,7 +374,7 @@ enum SharedStore {
         return try? decoder.decode(TasksSnapshot.self, from: data)
     }
 
-    private static func reloadWidgets() {
+    static func reloadWidgets() {
         let reload = {
             WidgetCenter.shared.reloadTimelines(ofKind: AppGroup.widgetKind)
             WidgetCenter.shared.reloadTimelines(ofKind: AppGroup.widgetKindLegacy)
@@ -368,6 +385,15 @@ enum SharedStore {
         } else {
             DispatchQueue.main.async(execute: reload)
         }
+    }
+
+    private static func notifySnapshotChanged() {
+        DistributedNotificationCenter.default().postNotificationName(
+            AppGroup.snapshotDidChange,
+            object: nil,
+            userInfo: nil,
+            deliverImmediately: true
+        )
     }
 
     static func mutate(_ transform: (inout TasksSnapshot) -> Void) {

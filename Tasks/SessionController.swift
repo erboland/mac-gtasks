@@ -1,6 +1,5 @@
 import AppKit
 import SwiftUI
-import WidgetKit
 
 @MainActor
 final class SessionController: ObservableObject {
@@ -18,6 +17,7 @@ final class SessionController: ObservableObject {
     @Published private(set) var completingIds: Set<String> = []
     private var statusOverrides: [String: Bool] = [:]
     private static let onboardingKey = "hasCompletedOnboarding"
+    private let refreshActivity = NSBackgroundActivityScheduler(identifier: "com.googletasks.Tasks.refresh")
 
     init() {
         SyncService.bootstrapDemoIfNeeded()
@@ -35,6 +35,24 @@ final class SessionController: ObservableObject {
             SharedStore.save(loaded)
         }
         consumePendingCompose()
+        startBackgroundRefresh()
+    }
+
+    deinit {
+        refreshActivity.invalidate()
+    }
+
+    private func startBackgroundRefresh() {
+        refreshActivity.repeats = true
+        refreshActivity.interval = SyncService.widgetReloadInterval
+        refreshActivity.tolerance = 30
+        refreshActivity.qualityOfService = .utility
+        refreshActivity.schedule { [weak self] completion in
+            Task { @MainActor in
+                await self?.refresh(userInitiated: false)
+                completion(.finished)
+            }
+        }
     }
 
     var needsOnboarding: Bool { !hasCompletedOnboarding }
@@ -141,27 +159,48 @@ final class SessionController: ObservableObject {
         selectedListId = snapshot.selectedListId
     }
 
-    func refresh() async {
+    func reloadFromDisk() {
+        SharedStore.invalidateCache()
+        snapshot = adopt(SharedStore.load())
+        isSignedIn = TokenFileStore.load() != nil
+        applyKeptSelection(selectedListId)
+    }
+
+    func refresh(userInitiated: Bool = true) async {
         guard isSignedIn else {
             snapshot = SharedStore.load()
             return
         }
-        isSyncing = true
-        errorMessage = nil
-        defer { isSyncing = false }
+        if userInitiated {
+            isSyncing = true
+            errorMessage = nil
+        }
+        defer {
+            if userInitiated { isSyncing = false }
+        }
         let keepSelection = selectedListId
         do {
-            try await SyncService.syncFromGoogle()
-            snapshot = adopt(SharedStore.load())
-            if let keepSelection, snapshot.list(id: keepSelection) != nil {
-                selectedListId = keepSelection
-                snapshot.selectedListId = keepSelection
-            } else if selectedListId == nil || snapshot.list(id: selectedListId ?? "") == nil {
-                selectedListId = snapshot.selectedListId ?? snapshot.lists.first?.id
+            if userInitiated {
+                try await SyncService.syncFromGoogle()
+            } else {
+                await SyncService.syncFromGoogleIfNeeded()
             }
-        } catch {
-            errorMessage = error.localizedDescription
             snapshot = adopt(SharedStore.load())
+            applyKeptSelection(keepSelection)
+        } catch {
+            if userInitiated {
+                errorMessage = error.localizedDescription
+            }
+            snapshot = adopt(SharedStore.load())
+        }
+    }
+
+    private func applyKeptSelection(_ keepSelection: String?) {
+        if let keepSelection, snapshot.list(id: keepSelection) != nil {
+            selectedListId = keepSelection
+            snapshot.selectedListId = keepSelection
+        } else if selectedListId == nil || snapshot.list(id: selectedListId ?? "") == nil {
+            selectedListId = snapshot.selectedListId ?? snapshot.lists.first?.id
         }
     }
 

@@ -2,6 +2,11 @@ import Foundation
 import WidgetKit
 
 enum SyncService {
+    static let automaticInterval: TimeInterval = 2 * 60
+    static let widgetReloadInterval: TimeInterval = 5 * 60
+
+    private static let gate = SyncGate()
+
     static func bootstrapDemoIfNeeded() {
         if TokenFileStore.load() != nil { return }
         let current = SharedStore.load()
@@ -11,8 +16,15 @@ enum SyncService {
     }
 
     static func syncFromGoogle() async throws {
-        let snapshot = try await GoogleTasksClient.fetchAll()
-        SharedStore.save(snapshot)
+        _ = try await gate.run(force: true, minInterval: 0, reloadWidgets: true)
+    }
+
+    @discardableResult
+    static func syncFromGoogleIfNeeded(
+        minInterval: TimeInterval = automaticInterval,
+        reloadWidgets: Bool = true
+    ) async -> Bool {
+        (try? await gate.run(force: false, minInterval: minInterval, reloadWidgets: reloadWidgets)) ?? false
     }
 
     static func setCompleted(listId: String, taskId: String, completed: Bool) async {
@@ -84,5 +96,64 @@ enum SyncService {
         let signedIn = await TokenManager.shared.currentTokens() != nil
         guard GoogleAuthConfig.isConfigured, signedIn else { return }
         try? await GoogleTasksClient.updateTitle(listId: listId, taskId: taskId, title: title)
+    }
+}
+
+/// Serializes Google pulls so the widget, app, and refresh button don't race.
+private actor SyncGate {
+    private var inFlight: Task<Bool, Error>?
+
+    func run(force: Bool, minInterval: TimeInterval, reloadWidgets: Bool) async throws -> Bool {
+        if let inFlight {
+            let didSync = try await inFlight.value
+            if !force { return didSync }
+        }
+
+        guard GoogleAuthConfig.isConfigured, TokenFileStore.load() != nil else {
+            return false
+        }
+
+        if !force {
+            let last = SharedStore.load().lastSyncedAt
+            if let last, Date().timeIntervalSince(last) < minInterval {
+                return false
+            }
+        }
+
+        let task = Task<Bool, Error> {
+            try await SyncGate.pullAndSave(reloadWidgets: reloadWidgets)
+            return true
+        }
+        inFlight = task
+        defer { inFlight = nil }
+        return try await task.value
+    }
+
+    private static func pullAndSave(reloadWidgets: Bool) async throws {
+        let local = SharedStore.load()
+        var remote = try await GoogleTasksClient.fetchAll()
+        remote = mergePendingCompletions(remote: remote, local: local)
+        SharedStore.save(remote, reloadWidgets: reloadWidgets)
+    }
+
+    /// Keep a checkbox the user just tapped if Google hasn't seen the PATCH yet.
+    private static func mergePendingCompletions(remote: TasksSnapshot, local: TasksSnapshot) -> TasksSnapshot {
+        var remote = remote
+        let window = Date().addingTimeInterval(-90)
+        for (listIndex, list) in remote.lists.enumerated() {
+            guard let localList = local.list(id: list.id) else { continue }
+            for (taskIndex, task) in list.tasks.enumerated() {
+                guard let localTask = localList.tasks.first(where: { $0.id == task.id }) else { continue }
+                let localStamp = localTask.completed ?? localTask.updated ?? .distantPast
+                if localTask.isCompleted, !task.isCompleted, localStamp >= window {
+                    remote.lists[listIndex].tasks[taskIndex].status = "completed"
+                    remote.lists[listIndex].tasks[taskIndex].completed = localTask.completed ?? Date()
+                } else if !localTask.isCompleted, task.isCompleted, (localTask.updated ?? .distantPast) >= window {
+                    remote.lists[listIndex].tasks[taskIndex].status = "needsAction"
+                    remote.lists[listIndex].tasks[taskIndex].completed = nil
+                }
+            }
+        }
+        return remote
     }
 }
